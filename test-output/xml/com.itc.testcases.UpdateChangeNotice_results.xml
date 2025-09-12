@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="UpdateChangeNotice"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="48.534">
+  <properties />
+  
+  
+            <testcase name="reassignchangerequest" time="48.534" classname="com.itc.testcases.UpdateChangeNotice" />
+      
+</testsuite>

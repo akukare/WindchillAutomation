@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-09-12T00:40:53 IST" name="Default suite" finished-at="2025-09-12T00:41:40 IST" duration-ms="46473">
+    <groups>
+    </groups>
+    <test started-at="2025-09-12T00:40:53 IST" name="Default test" finished-at="2025-09-12T00:41:40 IST" duration-ms="46473">
+      <class name="com.itc.testcases.CreateEPMDocument">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.itc.testcases.CreateEPMDocument@57cf54e1]" started-at="2025-09-12T00:40:53 IST" name="setup" finished-at="2025-09-12T00:40:53 IST" duration-ms="19" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method is-config="true" signature="initPages()[pri:0, instance:com.itc.testcases.CreateEPMDocument@57cf54e1]" started-at="2025-09-12T00:40:53 IST" name="initPages" finished-at="2025-09-12T00:40:56 IST" duration-ms="2518" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initPages -->
+        <test-method signature="verifyCreateEPMDocument()[pri:0, instance:com.itc.testcases.CreateEPMDocument@57cf54e1]" started-at="2025-09-12T00:40:56 IST" name="verifyCreateEPMDocument" finished-at="2025-09-12T00:41:24 IST" duration-ms="28105" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyCreateEPMDocument -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.itc.testcases.CreateEPMDocument@57cf54e1]" started-at="2025-09-12T00:41:24 IST" name="tearDown" finished-at="2025-09-12T00:41:40 IST" duration-ms="15446" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.itc.testcases.CreateEPMDocument -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ReassignPromotionRequest"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="79.518">
+  <properties />
+  
+  
+            <testcase name="reassignpromotionrequest" time="79.518" classname="com.itc.testcases.ReassignPromotionRequest" />
+      
+</testsuite>

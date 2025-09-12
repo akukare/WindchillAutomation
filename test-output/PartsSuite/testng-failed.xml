@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [PartsSuite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="PartsTest(failed)">
+    <classes>
+      <class name="com.itc.testcases.LoginErrorSNTicketCreation">
+        <methods>
+          <include name="Login" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- com.itc.testcases.LoginErrorSNTicketCreation -->
+    </classes>
+  </test> <!-- PartsTest(failed) -->
+</suite> <!-- Failed suite [PartsSuite] -->

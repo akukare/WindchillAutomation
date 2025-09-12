@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="testng" verbose="1" parallel="false">
+ 
+    <listeners>
+        <listener class-name="com.itc.Listeners.CustomListeners"/>
+    </listeners>
+ 
+    <!-- Step 4: Configure Test Classes -->
+    <test name="EPM Test">
+        <classes>
+            <class name="com.itc.testcases.CreateEPMDocument"/>
+        </classes>
+    </test>
+     <test name="Part Test">
+        <classes>
+            <class name="com.itc.testcases.Createnewpart"/>
+        </classes>
+    </test>
+             <!--  <class name="com.itc.testcases.CreateChangeRequest"/>
+             <class name="com.itc.testcases.CreateEPMDocument"/>
+            <class name="com.itc.testcases.CreatenewFolder"/>
+            <class name="com.itc.testcases.Createnewpart"/>
+            <class name="com.itc.testcases.CreateProblemReport"/>
+            <class name="com.itc.testcases.CreatePromotionRequest"/>
+            <class name="com.itc.testcases.CreateWTDocument"/>
+            <class name="com.itc.testcases.DeletePart"/>
+            <class name="com.itc.testcases.Login"/>
+            <class name="com.itc.testcases.LoginErrorSNTicketCreation"/>
+            <class name="com.itc.testcases.ReassignChangeNotice"/>
+            <class name="com.itc.testcases.ReassignChangeRequest"/>
+            <class name="com.itc.testcases.ReassignProblemReport"/>
+            <class name="com.itc.testcases.ReassignPromotionRequest"/>
+            <class name="com.itc.testcases.UpdateChangeNotice"/>
+            <class name="com.itc.testcases.UpdateChangeRequest"/>
+            <class name="com.itc.testcases.UpdatePart"/>
+            <class name="com.itc.testcases.UpdateProblemReport"/>
+            <class name="com.itc.testcases.UpdatePromotionRequest"/>
+            <class name="com.itc.testcases.ViewPart"/>-->    
+            <!-- Add more test classes here if needed -->
+</suite>

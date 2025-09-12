@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Windchill">
+
+	 <listeners>
+
+		<listener class-name="com.itc.Listeners.CustomListeners" />
+
+		<!--<listener class-name="com.itc.errorcollectors.TestListenerAdapter" /> -->
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+
+	</listeners>
+
+<test name="CreatenewFolder">
+		<classes>
+			<class name="com.itc.testcases.CreatenewFolder" />
+		</classes> 
+</test>
+
+
+
+	<test name="Createnewpart">
+		<classes>
+			<class name="com.itc.testcases.Createnewpart" />
+		</classes>
+	</test>
+<!--		
+	<test name="Viewpart">
+		<classes>
+			<class name="com.itc.testcases.ViewPart" />
+		</classes>
+	</test>  
+	
+	
+	  	<test name="UpdatePart">
+		<classes>
+			<class name="com.itc.testcases.UpdatePart" />
+		</classes>
+	</test>
+
+
+ <test name="DeletePart">
+		<classes>
+			<class name="com.itc.testcases.DeletePart" />
+		</classes>
+	</test>  
+	
+ 	
+	<test name="CreateProblemReport">
+		<classes>
+			<class name="com.itc.testcases.CreateProblemReport" />
+		</classes>
+	</test> 
+	 
+ 	<test name="UpdateProblemReport">
+		<classes>
+			<class name="com.itc.testcases.UpdateProblemReport" />
+		</classes>
+	</test>  
+	
+	<test name="ReassignProblemReport">
+		<classes>
+			<class name="com.itc.testcases.ReassignProblemReport" />
+		</classes>
+	</test> 
+
+<test name="CreateEPMDocument">
+		<classes>
+			<class name="com.itc.testcases.CreateEPMDocument" />
+		</classes>
+	</test> 
+
+<test name="CreateChangeRequest">
+		<classes>
+			<class name="com.itc.testcases.CreateChangeRequest" />
+		</classes>
+	</test> 
+
+<test name="UpdateChangeRequest">
+		<classes>
+			<class name="com.itc.testcases.UpdateChangeRequest" />
+		</classes>
+	</test> 
+
+<test name="ReassignChangeRequest">
+		<classes>
+			<class name="com.itc.testcases.ReassignChangeRequest" />
+		</classes> 
+	</test> 
+	
+	<test name="CreateWTDocument">
+		<classes>
+			<class name="com.itc.testcases.CreateWTDocument"/>
+		</classes>
+	</test> 
+	
+	<test name="CreateChangeNotice">
+		<classes>
+			<class name="com.itc.testcases.CreateChangeNotice"/>
+		</classes>
+	</test> 
+	
+	<test name="UpdateChangeNotice">
+		<classes>
+			<class name="com.itc.testcases.UpdateChangeNotice"/>
+		</classes>
+	</test> 
+	
+	<test name="ReassignChangeNotice">
+		<classes>
+			<class name="com.itc.testcases.ReassignChangeNotice"/>
+		</classes>
+	</test> 
+	<test name="CreatePromotionRequest">
+		<classes>
+			<class name="com.itc.testcases.CreatePromotionRequest"/>
+		</classes>
+	</test> 
+	 
+	 <test name="UpdatePromotionRequest">
+		<classes>
+			<class name="com.itc.testcases.UpdatePromotionRequest"/>
+		</classes>
+	</test> 
+	<test name="ReassignPromotionRequest">
+		<classes>
+			<class name="com.itc.testcases.ReassignPromotionRequest"/>
+		</classes>
+		
+	</test> -->	
+</suite> 

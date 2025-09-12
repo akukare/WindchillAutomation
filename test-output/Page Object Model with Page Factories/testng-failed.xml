@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Page Object Model with Page Factories]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Createnewpart(failed)">
+    <classes>
+      <class name="com.itc.testcases.Createnewpart">
+        <methods>
+          <include name="setUp"/>
+          <include name="createnewpart"/>
+        </methods>
+      </class> <!-- com.itc.testcases.Createnewpart -->
+    </classes>
+  </test> <!-- Createnewpart(failed) -->
+</suite> <!-- Failed suite [Page Object Model with Page Factories] -->

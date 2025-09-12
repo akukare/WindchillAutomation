@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [testng]" verbose="0">
+  <listeners>
+    <listener class-name="com.itc.Listeners.CustomListeners"/>
+  </listeners>
+  <test thread-count="5" name="EPM Test(failed)" verbose="0">
+    <classes>
+      <class name="com.itc.testcases.CreateEPMDocument">
+        <methods>
+          <include name="handleTestFailure"/>
+          <include name="verifyCreateEPMDocument"/>
+          <include name="setup"/>
+          <include name="tearDown"/>
+          <include name="initPages"/>
+        </methods>
+      </class> <!-- com.itc.testcases.CreateEPMDocument -->
+    </classes>
+  </test> <!-- EPM Test(failed) -->
+</suite> <!-- Failed suite [testng] -->

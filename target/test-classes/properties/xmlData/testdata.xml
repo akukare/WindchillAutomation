@@ -1,0 +1,11 @@
+<!--<?xml-model href="testdata.xsd"?>-->
+<testdata>
+	<testcase id="loginTest">
+		<username>demouser</username>
+		<password>demouser</password>
+		<url>https://plmtvdr3.plmtestlab.com/Windchill/</url>
+	</testcase>
+	
+	<product>testProduct</product>
+	<wcurl>https://plmtvdr3.plmtestlab.com/Windchill/</wcurl>
+</testdata>
