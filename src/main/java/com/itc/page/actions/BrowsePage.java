@@ -15,41 +15,30 @@ public class BrowsePage extends BaseTest {
 
 	public BrowsePageLocators Browse;
 	
-	public BrowsePage()
-	{
-		
+	public BrowsePage(){
 		this.Browse=new BrowsePageLocators();
 		PageFactory.initElements(driver, this.Browse);
-		
 	}
 	
-	public void RecentProducts(){
-		
-		ElementActions.click(Browse.RecentProductsTab);
-		
+	public void RecentProducts() {
+	    ElementActions.click(Browse.recentProductsTab);
 	}
-	
-	public void gotoProducts()
-	{
 
-		ElementActions.click(Browse.gotoProducts);
+	public void gotoProducts() {
+	    ElementActions.click(Browse.gotoProducts);
 	}
-	
-	 public void gotoProductFolder() {
-		 
-		 ElementActions.click(Browse.gotoProductFolder);
-	 }
-	 
-public void gotoProductsubFolder() {
-		 
 
-	ElementActions.click(Browse.gotoProductsubFolder);
-	 }
+	public void gotoProductFolder() {
+	    ElementActions.click(Browse.gotoProductFolder);
+	}
 
-public void gotoViewAll() {
-	
-	ElementActions.click(Browse.gotoViewAll);
-}
+	public void gotoProductSubFolder() {
+	    ElementActions.click(Browse.gotoProductSubFolder);
+	}
+
+	public void gotoViewAll() {
+	    ElementActions.click(Browse.gotoViewAll);
+	}
 
 /**
  * Navigates to a specific section within a product.

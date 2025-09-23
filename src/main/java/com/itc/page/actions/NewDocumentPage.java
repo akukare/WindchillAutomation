@@ -30,9 +30,7 @@ public class NewDocumentPage extends BaseTest {
 	}
 
 	public void gotodropdown() {
-
 		NewDocument.getdropdownelement.click();
-
 	}
 
 	public void SelectDocprimarytypedropDown(String Value) {
@@ -41,12 +39,10 @@ public class NewDocumentPage extends BaseTest {
 	}
 
 	public void enterdocname(String Name) {
-
 		type(NewDocument.DocName, Name);
 	}
 
 	public void clickFinish() {
-
 		click(NewDocument.FinishButton);
 	}
 

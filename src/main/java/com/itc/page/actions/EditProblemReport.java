@@ -20,27 +20,21 @@ public CommonLocators commonLocators;
 		PageFactory.initElements(driver, this.commonLocators);
 	}
 
-
 	public void gotoActions() {
-
 		ElementActions.click(EditProblem.Actions);
 	}
 
-	public void clickEdit()
-	{
+	public void clickEdit(){
 		ElementActions.click(EditProblem.Edit);
 	}
-
-
+	
 	public void entername(String Name) {
 		clear(EditProblem.Name);
 		WaitUtils.waitForSeconds(1);
 		ElementActions.sendKeys(EditProblem.Name,Name);
-
 	}
 
 	public void clickFinish() {
 		ElementActions.click(EditProblem.FinishButton);
 	}
-
 }

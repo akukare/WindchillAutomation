@@ -6,9 +6,6 @@ import com.itc.base.BaseTest;
 import com.itc.pagelocators.EditChangeNoticeLocators;
 
 public class EditChangeNoticePage extends BaseTest{
-	
-	
-
 		public EditChangeNoticeLocators EditChangeNotice;
 		
 		public EditChangeNoticePage() {
@@ -26,10 +23,8 @@ public class EditChangeNoticePage extends BaseTest{
 		}
 
 		public void entername(String Name) {
-			
 			EditChangeNotice.Name.clear();
 			type(EditChangeNotice.Name,Name);
-			
 		}
 
 		public void clickFinish() {

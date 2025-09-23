@@ -20,4 +20,5 @@ public class EditPartPageLocators {
 	@FindBy(xpath = "//button[contains(text(),'K') and (@id='ext-gen35')]")
 	public WebElement Ok;
 
+	 //Please write from here Dynamic locator method - cannot use @FindBy
 }

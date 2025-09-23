@@ -21,12 +21,9 @@ public class EditChangeRequestPage extends BaseTest {
 	public void clickEdit() {
 		click(EditChange.Edit);
 	}
-
 	public void entername(String Name) {
-
 		EditChange.Name.clear();
 		type(EditChange.Name, Name);
-
 	}
 
 	public void clickFinish() {

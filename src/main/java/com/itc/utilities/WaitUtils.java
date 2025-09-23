@@ -42,7 +42,15 @@ public class WaitUtils extends BaseTest{
 			throw new RuntimeException("Element not clickable within " + timeoutInSeconds + " sec: " + locator, e);
 		}
 	}
-
+	public WebElement waitForElementClickable(WebElement locator, int timeoutInSeconds) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+			return wait.until(ExpectedConditions.elementToBeClickable(locator));
+		} catch (TimeoutException e) {
+			throw new RuntimeException("Element not clickable within " + timeoutInSeconds + " sec: " + locator, e);
+		}
+	}
+	
 	public Boolean waitForElementInvisble(By locator, int timeoutInSeconds) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
@@ -91,17 +99,50 @@ public class WaitUtils extends BaseTest{
 		}
 	}
 	
-	public  WebElement waitUntilVisible(By locator, int maxWaitTime) {
-		try {
-			Wait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(maxWaitTime))
-					.pollingEvery(Duration.ofMillis(500)).ignoring(NoSuchElementException.class)
-					.ignoring(StaleElementReferenceException.class);
+	/**
+	 * Waits until the specified element is visible, retrying periodically until timeout.
+	 *
+	 * @param locator     WebElement locator of the target element.
+	 * @param maxWaitTime  Maximum wait time in seconds.
+	 * @return The visible WebElement if found; null otherwise.
+	 */
+	public static WebElement waitUntilVisible(WebDriver driver, WebElement locator, int maxWaitTime) {
+	    try {
+	        Wait<WebDriver> wait = new FluentWait<>(driver)
+	                .withTimeout(Duration.ofSeconds(maxWaitTime))
+	                .pollingEvery(Duration.ofMillis(500))
+	                .ignoring(NoSuchElementException.class)
+	                .ignoring(StaleElementReferenceException.class);
 
-			return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-		} catch (TimeoutException e) {
-			throw new RuntimeException("Element not clickable within " + maxWaitTime + " sec: " + locator, e);
-		}
+	        return wait.until(ExpectedConditions.visibilityOf(locator));
+	    } catch (TimeoutException e) {
+	        System.out.println(e.getMessage());
+	        return null;
+	    }
 	}
+	/**
+	 * Waits until the specified element is visible, retrying periodically until timeout.
+	 *
+	 * @param locator      By locator of the target element.
+	 * @param maxWaitTime  Maximum wait time in seconds.
+	 * @return The visible WebElement if found; null otherwise.
+	 */
+	public static WebElement waitUntilVisible(WebDriver driver, By locator, int maxWaitTime) {
+	    try {
+	        Wait<WebDriver> wait = new FluentWait<>(driver)
+	                .withTimeout(Duration.ofSeconds(maxWaitTime))
+	                .pollingEvery(Duration.ofMillis(500))
+	                .ignoring(NoSuchElementException.class)
+	                .ignoring(StaleElementReferenceException.class);
+
+	        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+	    } catch (TimeoutException e) {
+	        System.out.println(e.getMessage());
+	        return null;
+	    }
+	}
+
+
 	
 	/**
 	 * Checks if a browser alert is present.

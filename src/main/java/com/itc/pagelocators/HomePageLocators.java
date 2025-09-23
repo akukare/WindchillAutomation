@@ -32,5 +32,6 @@ public class HomePageLocators {
 	@FindBy(xpath = "//form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[2]/td[2]")
 	public WebElement newDocument;
 	
+	 //Please write from here Dynamic locator method - cannot use @FindBy
 	
 }

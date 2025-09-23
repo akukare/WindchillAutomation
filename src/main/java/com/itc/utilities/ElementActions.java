@@ -74,15 +74,15 @@ public class ElementActions extends BaseTest{
         
     }
 
-	public static String getText(By locator) {
-		try {
-			WebElement element = driver.findElement(locator);
-			return element.getText().trim(); // Removes leading/trailing whitespace
-		} catch (Exception e) {
-			System.out.println("[getText] Error retrieving text: " + e.getMessage());
-			throw e;
-		}
+	public static String getText(WebElement element) {
+	    try {
+	        return element.getText().trim(); // Removes leading/trailing whitespace
+	    } catch (Exception e) {
+	        System.out.println("[getText] Error retrieving text: " + e.getMessage());
+	        throw e;
+	    }
 	}
+
 
 	public void scrollToElement(By locator) {
 		try {

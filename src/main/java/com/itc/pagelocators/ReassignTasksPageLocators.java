@@ -13,4 +13,6 @@ public class ReassignTasksPageLocators {
 	
 	@FindBy(xpath = "//div[@id='projectmanagement.overview.assignments.list.toolBar']/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[2]/table[1]/tbody[1]/tr[2]/td[2]/em[1]/button[1]")
 	public WebElement Reassigntasks;
+	
+	 //Please write from here Dynamic locator method - cannot use @FindBy
 }

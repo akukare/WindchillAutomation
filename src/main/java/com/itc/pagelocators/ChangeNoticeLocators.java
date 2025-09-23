@@ -42,5 +42,7 @@ public class ChangeNoticeLocators {
 	
 	@FindBy(xpath = "//li[contains(@id,'affectedAndResultingItems')]")
     public WebElement selectAffectedObjectWindow;
+	
+	 //Please write from here Dynamic locator method - cannot use @FindBy
  
 }

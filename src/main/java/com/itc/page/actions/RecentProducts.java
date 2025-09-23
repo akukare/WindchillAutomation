@@ -10,7 +10,6 @@ public class RecentProducts extends BaseTest {
 	public RecentProductsLocators RecentProducts;
 
 	public RecentProducts() {
-
 		this.RecentProducts = new RecentProductsLocators();
 		PageFactory.initElements(driver, this.RecentProducts);
 	}

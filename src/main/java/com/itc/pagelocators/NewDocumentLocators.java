@@ -18,4 +18,5 @@ public class NewDocumentLocators {
    @FindBy(xpath = "//button[contains(text(),'inish')]")
    public WebElement FinishButton;
 	
+   //Please write from here Dynamic locator method - cannot use @FindBy
 }

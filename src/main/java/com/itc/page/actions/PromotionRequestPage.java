@@ -26,14 +26,12 @@ public class PromotionRequestPage extends BaseTest {
 	}
 
 	public void clickNextbtn() {
-
 		ElementActions.click(PromotionRequest.Nextbtn);
 	}
 
 	public void SelectTargetPromotionStatedropDown(String Value) {
 		Select dropdown = new Select(PromotionRequest.getTargetPromotionState);
 		dropdown.selectByVisibleText(Value);
-
 	}
 
 	public void clickFinish() {

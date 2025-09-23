@@ -25,23 +25,18 @@ public class EditPromotionRequestPage extends BaseTest {
 		ElementActions.click(EditPromotionRequest.Actions);
 	}
 
-	public void clickEdit()
-	{
+	public void clickEdit(){
 		ElementActions.click(EditPromotionRequest.Edit);
 	}
-
-
+	
 	public void entername(String Name) {
-
 		ElementActions.click(EditPromotionRequest.Name);
 		clear(EditPromotionRequest.Name);
     	WaitUtils.waitForSeconds(1);
 		ElementActions.sendKeys(EditPromotionRequest.Name, Name);
-		
 	}
 
 	public void clickFinish() {
 		ElementActions.click(EditPromotionRequest.FinishButton);
-	}
-	
+	}	
 }

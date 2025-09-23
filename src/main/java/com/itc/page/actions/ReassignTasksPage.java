@@ -22,7 +22,6 @@ public class ReassignTasksPage extends BaseTest {
 	}
 
 	public void gotoReassignto_dropdown() {
-
 		ElementActions.click(reassigntasks.getdropdownreassignto);
 	}
 
@@ -41,6 +40,4 @@ public class ReassignTasksPage extends BaseTest {
 		ElementActions.click(reassigntasks.Reassigntasks);
 
 	}
-
-
 }

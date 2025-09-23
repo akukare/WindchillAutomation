@@ -21,4 +21,5 @@ public class EditProblemReportLocators {
 	@FindBy(xpath = "//button[@id='ext-gen39']")
 	public WebElement  displayName;
 	
+	 //Please write from here Dynamic locator method - cannot use @FindBy
 }

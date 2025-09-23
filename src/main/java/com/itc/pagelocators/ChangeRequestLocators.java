@@ -45,6 +45,8 @@ public class ChangeRequestLocators{
 	@FindBy(xpath = "//td[contains(@attrid, 'name')]")
 
 	public WebElement nameElement;
+	
+	 //Please write from here Dynamic locator method - cannot use @FindBy
 
 }
 

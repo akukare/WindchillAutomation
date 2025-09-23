@@ -12,7 +12,6 @@ public class NewPartPageLocators  {
 	@FindBy(xpath = "//select[@id='!~objectHandle~partHandle~!createType']")
 	public WebElement getdropdownelement;
 	
-
 	@FindBy(xpath = "//tbody/tr[2]/td[3]/input[@type='text']")
 	public WebElement PartName;
 	
@@ -32,6 +31,7 @@ public class NewPartPageLocators  {
 	@FindBy(xpath = "//input[@id='folderbrowser_PDM.searchInListTextBox']")
 	public WebElement searchInputFolderPage;
 	
+	 //Please write from here Dynamic locator method - cannot use @FindBy
 }
 
 

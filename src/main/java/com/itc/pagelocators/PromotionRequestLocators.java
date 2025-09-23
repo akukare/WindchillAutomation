@@ -35,4 +35,6 @@ public class PromotionRequestLocators {
 	
 	@FindBy(xpath = "//div[@class = 'x-grid3-row-checker']")
 	public WebElement clickCheckbox;
+	
+	 //Please write from here Dynamic locator method - cannot use @FindBy
 }

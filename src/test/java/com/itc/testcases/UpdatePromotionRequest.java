@@ -1,17 +1,20 @@
 package com.itc.testcases;
 
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import com.itc.Listeners.CustomListeners;
 import com.itc.base.BaseTest;
-import com.itc.page.actions.BOMPageActions;
 import com.itc.page.actions.BrowsePage;
+import com.itc.page.actions.EditPromotionRequestPage;
 import com.itc.page.actions.HomePage;
 import com.itc.page.actions.NewPartPage;
 import com.itc.page.actions.ProductPage;
+import com.itc.page.actions.PromotionRequestPage;
 import com.itc.utilities.ConfigReader;
 import com.itc.utilities.LogUtil;
 import com.itc.utilities.TestInfo;
@@ -22,13 +25,14 @@ import com.itc.utilities.XMLReader;
 *
 * Summary
 *--------------
-* User should be able to Create New part.
+* User should be able to Update Promotion request.
 *
 * Prerequisite :
 * -----------------
 * 1. Test User Credentials - Product Manager , Design Engineer
 * 2. Product Name
 * 3. Part Name
+* 4. promotional Request Name
 *
 * Steps:
 * -------
@@ -37,56 +41,68 @@ import com.itc.utilities.XMLReader;
 * 3. Click on expand  and navigate to "Folders" of product 
 * 4. Click  on Actions --> New ---->New Part 
 * 5. User fills in required details in the form and clicks on "Next". (Note: All fields marked in * are mandatory fields).
+* 6. Navigate to Product Container
+* 7. Click on expand  and navigate to "Folders" of product 
+* 8. Select newly created Part
+* 9. Click  on Actions --> New ---->New Promotion Request
+* 10. Fill all mandatory fields and click on finish
+* 11. Verify New Promotion Request created
+* 12. go to actions --> Edit
+* 13. Edit Promotion Request and click on finish
+* 14. Verify Promotional Request Edited
 *
 * Expected Behaviour:
 * -----------
-* 1.User should be able to Create new part.
+* 1.User should be able to Update Promotion request.
 *
 * @author "*****"
 */
 
-
 @Listeners(CustomListeners.class)
-public class Createnewpart extends BaseTest {
+public class UpdatePromotionRequest extends BaseTest {
 	HomePage home;
 	BrowsePage browse;
-	private ProductPage product;
-	ProductPage folderDropdownText;
+	ProductPage product;
 	NewPartPage newPartPage;
-	BOMPageActions BOMPag;
+	PromotionRequestPage promotionrequest;
+	EditPromotionRequestPage editpromotionrequest;
 	String partName;
+	String prName;
+	String editprName;
 	private XMLReader xmlReader;
 	private String productName;
-	private String foldertext;
 
 	@BeforeClass
 	public void setup() throws Exception {
+
 		config = ConfigReader.getProperties();
 		xmlReader = new XMLReader();
 		productName = xmlReader.getData("product");
-		foldertext = xmlReader.getData("folderDropdownText");
-		partName = "Part-" + generateRandomNumber(6);
+		partName = "newPart-" + generateRandomNumber(6);
+		prName = "newPromotionRequest-" + generateRandomNumber(6);
+		editprName = "EditedPromotionRequest-" + generateRandomNumber(6);
 	}
 
 	@BeforeMethod
 	public void initPages() throws Exception {
+
 		initializeDriver();
 		home = new HomePage();
 		browse = new BrowsePage();
 		product = new ProductPage();
 		newPartPage = new NewPartPage();
-		BOMPag =new BOMPageActions();
-	}
-
+		promotionrequest = new PromotionRequestPage();
+		editpromotionrequest = new EditPromotionRequestPage();
+		}
 	
-	 @Test
-	    @TestInfo(FunctionalArea = "Create New Part",
-	        Owner = "rsakhare",
-	        Tags = { "QA", "Functional", "05-03-2025" },
-	        TestCaseID = "",
-	        Description = "User creates a New part in product")
-	public void verifyCreatenewpart() {
-		 
+	@Test
+    @TestInfo(FunctionalArea = "Edit Promotion Request",
+        Owner = "rsakhare",
+        Tags = { "QA", "Functional", "05-03-2025" },
+        TestCaseID = "",
+        Description = "User can Edit Promotion Request in product")
+	public void verifyUpdatePromotionRequest() {
+		
 			LogUtil.info("Login windchill");
 			loginToWindchill("windchillSignOndemouser", "windchillSignOnPassword");
 
@@ -112,28 +128,60 @@ public class Createnewpart extends BaseTest {
 			newPartPage.enterpartname(partName);
 			newPartPage.clickFinish();
 			switchToMainWindow(parentWindow);
-
-			newPartPage.searchObject(partName);
+			
 			LogUtil.info("Verify Part is created");
 			newPartPage.verifyPartCreatedandOpen();
 
+			home.gotoBrowse();
+			browse.RecentProducts();
+			browse.openSpecificSectionOfProduct(productName, "Folders");
+			product.folderContentsDropdown(xmlReader.getData("folderDropdownText"));
+			product.selectFolderCheckbox(partName);
+			product.gotoActions();
+			product.takeActions("New Promotion Request");
+
+			switchToWindowByHeader("New Promotion Request");
+
+			LogUtil.info("User fills in required details in the form and clicks on 'Finish'.");
+			promotionrequest.enterPromotinRequestNamename(prName);
+			promotionrequest.clickNextbtn();
+			promotionrequest.clickCheckBox();
+			promotionrequest.SelectTargetPromotionStatedropDown("Canceled");
+			promotionrequest.clickSetPromotionObjectIcon();
+			promotionrequest.clickFinish();
+
+			switchToMainWindow(parentWindow);
+			LogUtil.info("Verify New Promotion Request Created");
+			promotionrequest.verifyPromotionRequestCreatedandOpen();
+
+			editpromotionrequest.gotoActions();
+			editpromotionrequest.clickEdit();
+			switchToNewWindow();
+			editpromotionrequest.entername(editprName);
+			editpromotionrequest.clickFinish();
+			switchToMainWindow(parentWindow);
+			
+			LogUtil.info("Verify Edited Promotion Request Created");
+			promotionrequest.verifyPromotionRequestCreatedandOpen();
 	}
 
-	 @AfterClass()
+	@AfterClass()
 	public void tearDown() {
 		    LogUtil.info("Delete Part");
 			home.gotoBrowse();
 			browse.RecentProducts();
 			browse.openSpecificSectionOfProduct(productName, "Folders");
-			product.folderContentsDropdown(foldertext);
-			newPartPage.searchObject(partName);
-			BOMPag.selectObject(partName);
+			product.folderContentsDropdown(xmlReader.getData("folderDropdownText1"));
+			product.selectFolderCheckbox(prName);
 			product.gotoActions();
 			product.takeActions("Delete");
-		    WaitUtils.isAlertPresent();
-		 
-		    LogUtil.info("Alert was accepted.");
-		    performAlertAction("accept");
+			if (WaitUtils.isAlertPresent()) {
+				performAlertAction("gettext");
+				performAlertAction("accept");
+				LogUtil.info("Alert was accepted.");
+			} else {
+				LogUtil.info("No alert Present");
+			}
 			WaitUtils.waitForSeconds(2);
 			sessionEnd();
 	}

@@ -27,38 +27,26 @@ public class HomePage extends BaseTest {
 	}
 
 	public void gotoBrowse() {
-
 		ElementActions.click(home.BrowseTab);
-
-	}
-
-	public void gotoSearch() {
-
 	}
 
 	public void gotonewPart() {
 		ElementActions.click(home.newPart);
-
 	}
 
 	public void gotonewFolder() {
-
 		ElementActions.click(home.newFolder);
 	}
 
 	public void createFolderName(String Name) {
 		ElementActions.sendKeys(home.newFolderName, Name);
-
 	}
 
 	public void newFolderFinsh() {
-
 		ElementActions.click(home.newFolderFinish);
-
 	}
 
 	public void gotohomeIcon() {
-
 		ElementActions.click(home.homepageIcon);
 	}
 

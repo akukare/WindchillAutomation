@@ -18,4 +18,5 @@ public class EditChangeNoticeLocators {
 	@FindBy(xpath = "//button[@id='ext-gen39']")
 	public WebElement  FinishButton;
 
+	 //Please write from here Dynamic locator method - cannot use @FindBy
 }

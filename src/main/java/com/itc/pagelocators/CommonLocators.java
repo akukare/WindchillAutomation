@@ -18,4 +18,6 @@ public class CommonLocators {
 	
 	@FindBy(xpath = "//div[@class = 'x-tool x-tool-close']")
 	public WebElement popupMessageClose;
+	
+	 //Please write from here Dynamic locator method - cannot use @FindBy
 }

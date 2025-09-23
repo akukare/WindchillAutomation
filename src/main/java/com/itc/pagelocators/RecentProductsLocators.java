@@ -8,12 +8,11 @@ public class RecentProductsLocators {
 	@FindBy(xpath = "//li[@id='object_main_navigation__productNavigation']")
 	public WebElement RecentProductsTab;
 	
-	
 	@FindBy(xpath = "//li[@id='object_main_navigation__productNavigation']")
 	public WebElement gotoProductFolder;
 	
 	@FindBy(linkText = "Auto_test")
 	public WebElement gotoProductsubFolder;
 	
-	
+	 //Please write from here Dynamic locator method - cannot use @FindBy
 }

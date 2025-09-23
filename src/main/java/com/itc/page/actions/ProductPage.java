@@ -20,7 +20,6 @@ import com.itc.utilities.ElementActions;
 import com.itc.utilities.LogUtil;
 import com.itc.utilities.WaitUtils;
 
-
 public class ProductPage extends BaseTest {
 	public ProductPageLocators Product;
 	public CommonLocators commonLocators;
@@ -30,18 +29,24 @@ public class ProductPage extends BaseTest {
 		PageFactory.initElements(driver, this.Product);
 		this.commonLocators = new CommonLocators();
 		PageFactory.initElements(driver, this.commonLocators);
-		
+
 	}
 
-	public void clickViewPart() {ElementActions.click(Product.ViewPartIcon);}
+	public void clickViewPart() {
+		ElementActions.click(Product.ViewPartIcon);
+	}
 
 	public String getPartName() {
 		return ElementActions.getText(Product.ViewPartName);
 	}
 
-	public void gotoActions() {ElementActions.click(Product.Actions);}
+	public void gotoActions() {
+		ElementActions.click(Product.Actions);
+	}
 
-	public void checkoutandEdit() {ElementActions.click(Product.CheckOutandEdit);}
+	public void checkoutandEdit() {
+		ElementActions.click(Product.CheckOutandEdit);
+	}
 
 	public String getAssemblycodeelement() {
 		return ElementActions.getText(Product.getAssemblycodewebelement);
@@ -51,7 +56,9 @@ public class ProductPage extends BaseTest {
 		ElementActions.click(Product.PartCheckbox);
 	}
 
-	public void DeletePart() {ElementActions.click(Product.Delete);}
+	public void DeletePart() {
+		ElementActions.click(Product.Delete);
+	}
 
 	public void gotoNewLink() {
 		ElementActions.click(Product.Newlink);
@@ -95,19 +102,10 @@ public class ProductPage extends BaseTest {
 		}
 	}
 
-//	public void folderContentsDropdown(String value) {
-//		ElementActions.click(Product.folderBrowserinput);
-//		clear(Product.folderBrowserinput);
-//    	WaitUtils.waitForSeconds(1);
-//    	ElementActions.sendKeys(Product.folderBrowserinput, value + Keys.ENTER);
-//    	WaitUtils.waitForSeconds(1);
-//     }
-	
-	
 	public void folderContentsDropdown(String contentType) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		WebElement viewType = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProductPageLocators.folderBrowserinputXpath)));
+		WebElement viewType = wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.xpath(ProductPageLocators.folderBrowserinputXpath)));
 		viewType.clear();
 		viewType.sendKeys(contentType);
 		viewType.sendKeys(Keys.ENTER);
@@ -122,72 +120,78 @@ public class ProductPage extends BaseTest {
 
 	public void selectFolderCheckbox(String name) {
 		waitUntilVisible(Product.itemName(name), 10);
-	    List<WebElement> rows = driver.findElements(Product.itemRows);
+		List<WebElement> rows = driver.findElements((By) Product.itemRows);
 
-	    for (WebElement row : rows) {
-	        try {
-	            WebElement link = row.findElement(Product.itemName(name));
-	            if (link != null && link.isDisplayed()) {
-	            	highlightElement(row);
-	                WebElement checkbox = row.findElement(Product.checkbox);
-	                if (!checkbox.isSelected()) {
-	                	ElementActions.click(checkbox);
-	                	WaitUtils.waitForSeconds(1);
-	                }
-	                break;
-	            }
-	        } catch (NoSuchElementException e) {
-	        	LogUtil.info(e.getMessage());
-	        }
-	    }
+		for (WebElement row : rows) {
+			try {
+				WebElement link = row.findElement(Product.itemName(name));
+				if (link != null && link.isDisplayed()) {
+					highlightElement(row);
+					WebElement checkbox = row.findElement((By) Product.checkbox);
+					if (!checkbox.isSelected()) {
+						ElementActions.click(checkbox);
+						WaitUtils.waitForSeconds(1);
+					}
+					break;
+				}
+			} catch (NoSuchElementException e) {
+				LogUtil.info(e.getMessage());
+			}
+		}
 	}
 
 	public void rightClickOnProblemReport(String linkText) {
-        Actions actions = new Actions(driver);
-        actions.contextClick(Product.problemreportlink).perform();
-    }
-
-	public void rightClickOnCheckedCheckbox () {
-		
-		WebElement CheckedCheckBox = driver.findElement(By.xpath(" //div[@class='x-grid3-cell-inner x-grid3-col-type_icon']//img[@qtip='Change Notice']/ancestor::div[contains(@class, 'x-grid3-row')][1]"));
-		
-		 Actions actions = new Actions(driver);
-         actions.contextClick(CheckedCheckBox).perform();
+		Actions actions = new Actions(driver);
+		actions.contextClick(Product.problemreportlink).perform();
 	}
-	
-	public void rightClickOnCRCheckedCheckbox () {
-	
-	WebElement CheckedCheckBox1 = driver.findElement(By.xpath("//div[@class='x-grid3-cell-inner x-grid3-col-type_icon']//img[@qtip='Change Request']/ancestor::table[contains(@class, 'x-grid3-row-table')]//div[contains(@class, 'x-grid3-row-checker')]"));
-	 Actions actions = new Actions(driver);
-     actions.contextClick(CheckedCheckBox1).perform();
-}	
-	
+
+	public void rightClickOnCheckedCheckbox() {
+
+		WebElement CheckedCheckBox = driver.findElement(By.xpath(
+				" //div[@class='x-grid3-cell-inner x-grid3-col-type_icon']//img[@qtip='Change Notice']/ancestor::div[contains(@class, 'x-grid3-row')][1]"));
+
+		Actions actions = new Actions(driver);
+		actions.contextClick(CheckedCheckBox).perform();
+	}
+
+	public void rightClickOnCRCheckedCheckbox() {
+
+		WebElement CheckedCheckBox1 = driver.findElement(By.xpath(
+				"//div[@class='x-grid3-cell-inner x-grid3-col-type_icon']//img[@qtip='Change Request']/ancestor::table[contains(@class, 'x-grid3-row-table')]//div[contains(@class, 'x-grid3-row-checker')]"));
+		Actions actions = new Actions(driver);
+		actions.contextClick(CheckedCheckBox1).perform();
+	}
+
 	public void verifyFolderCreated() {
-	    try {
-	        waitForElementVisible(Product.successMessage, 20);
-	        if (Product.successMessage.isDisplayed()) {
-	            System.out.println("Folder creation confirmed.");
-	            Assert.assertTrue(true, "Folder creation successful.");
-	            click(Product.successMessageLink);
-	            waitForSeconds(2);
-	            if(Product.licenseAlertClose.isDisplayed()) {
-	            	click(Product.licenseAlertClose);
-	            }
-	        } else {
-	        	LogUtil.info("Confirmation message not displayed.");
-	            Assert.fail("Folder creation confirmation message not displayed.");
-	        }
-	    } catch (Exception e) {
-	    	LogUtil.info("Error during Folder creation verification: " + e.getMessage());
-	    }
+		try {
+			waitForElementVisible(Product.successMessage, 20);
+			if (Product.successMessage.isDisplayed()) {
+				System.out.println("Folder creation confirmed.");
+				Assert.assertTrue(true, "Folder creation successful.");
+				click(Product.successMessageLink);
+				waitForSeconds(2);
+				if (Product.licenseAlertClose.isDisplayed()) {
+					click(Product.licenseAlertClose);
+				}
+			} else {
+				LogUtil.info("Confirmation message not displayed.");
+				Assert.fail("Folder creation confirmation message not displayed.");
+			}
+		} catch (Exception e) {
+			LogUtil.info("Error during Folder creation verification: " + e.getMessage());
+		}
 	}
 
 	public void clickEditOption() {
 		ElementActions.click(Product.editOption);
 	}
-	
+
 	public void clickEditOptionChangeRequest() {
 		ElementActions.click(Product.editOption);
 	}
 	
+	public void ActionsButton() {ElementActions.click(Product.actionButton);
+	}
+	public void PRActionsButton() {ElementActions.click(Product.prActionButton);}
+
 }
