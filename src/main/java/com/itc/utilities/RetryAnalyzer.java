@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class RetryAnalyzer implements IRetryAnalyzer, IAnnotationTransformer {
 
-    private static int maxRetryCount = 1;
+    private static int maxRetryCount =1;
     private int retryCount = 0;
 
     static {
@@ -30,7 +30,7 @@ public class RetryAnalyzer implements IRetryAnalyzer, IAnnotationTransformer {
 
         if (retryEnv == null || retryEnv.isEmpty()) {
             try {
-                File file = new File("src/test/resources/Config.properties");
+                File file = new File("src/test/resources/properties/Config.properties");
                 System.out.println("Absolute path: " + file.getAbsolutePath());
                 System.out.println("Exists: " + file.exists());
                 if (file.exists()) {
@@ -55,12 +55,13 @@ public class RetryAnalyzer implements IRetryAnalyzer, IAnnotationTransformer {
         System.out.println("Final retry count being used: " + maxRetryCount);
     }
 
-    @Override
     public boolean retry(ITestResult result) {
-        if (retryCount < maxRetryCount) {
-            System.out.println("Retrying " + result.getName() + " | Attempt: " + (retryCount + 1));
-            retryCount++;
-            return true;
+        if (result.getStatus() == ITestResult.FAILURE) {
+            if (retryCount < maxRetryCount) {
+                System.out.println("Retrying " + result.getName() + " | Attempt: " + (retryCount + 1));
+                retryCount++;
+                return true;
+            }
         }
         return false;
     }
@@ -68,8 +69,6 @@ public class RetryAnalyzer implements IRetryAnalyzer, IAnnotationTransformer {
     @Override
     public void transform(ITestAnnotation annotation, Class testClass,
                           Constructor testConstructor, Method testMethod) {
-        if (annotation.getRetryAnalyzerClass() == null) {
             annotation.setRetryAnalyzer(RetryAnalyzer.class);
         }
     }
-}

@@ -351,5 +351,9 @@ public static void initializeDriver() {
 	      	    driver.manage().deleteAllCookies();
 				DriverFactory.quitDriver();
 	        }
+	    
+	    public WebDriver getDriver() {
+	        return driver;
+	    }
 	    }
 

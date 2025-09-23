@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -105,7 +106,22 @@ public class CustomListeners extends BaseTest implements ITestListener {
         } catch (Exception e) {
             ExtentTestManager.getTest().log(Status.WARNING, "Failed to stop/delete video: " + e.getMessage());
         }
+
+        // Safely quit browser if driver exists
+        try {
+            Object testClass = result.getInstance();
+            if (testClass instanceof BaseTest) {
+                WebDriver driver = ((BaseTest) testClass).getDriver();
+                if (driver != null) {
+                    driver.quit();
+                    ExtentTestManager.getTest().log(Status.INFO, "Browser closed after skipped test.");
+                }
+            }
+        } catch (Exception e) {
+            ExtentTestManager.getTest().log(Status.WARNING, "Failed to close browser after skip: " + e.getMessage());
+        }
     }
+
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {

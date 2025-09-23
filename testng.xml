@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="testng" verbose="1" parallel="false">
  
-    <listeners>
-        <listener class-name="com.itc.Listeners.CustomListeners"/>
+   <listeners>
+        <listener class-name="com.itc.Listeners.CustomListeners" />
+        <listener class-name="com.itc.utilities.RetryAnalyzer" />
     </listeners>
  
     <!-- Step 4: Configure Test Classes -->
