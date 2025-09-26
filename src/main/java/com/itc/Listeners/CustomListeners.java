@@ -41,6 +41,16 @@ public class CustomListeners extends BaseTest implements ITestListener {
     public void onTestSuccess(ITestResult result) {
         ExtentTestManager.getTest().log(Status.PASS, "Test Passed");
 
+        // Capture and attach screenshot for passed test
+        try {
+            String base64Screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+            ExtentTestManager.getTest().pass("Screenshot on Pass:",
+                MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+        } catch (Exception e) {
+            ExtentTestManager.getTest().log(Status.WARNING, "Failed to capture screenshot on pass: " + e.getMessage());
+        }
+
+        // Stop and delete video recording
         try {
             VideoRecorderUtility.stopRecording();
             VideoRecorderUtility.deleteRecording();
@@ -48,6 +58,7 @@ public class CustomListeners extends BaseTest implements ITestListener {
             ExtentTestManager.getTest().log(Status.WARNING, "Failed to stop/delete video: " + e.getMessage());
         }
     }
+
     
     @Override
     public void onTestFailure(ITestResult result) {
