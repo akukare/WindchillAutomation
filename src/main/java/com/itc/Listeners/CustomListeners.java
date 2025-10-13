@@ -15,6 +15,7 @@ import com.aventstack.extentreports.Status;
 import com.itc.base.BaseTest;
 import com.itc.utilities.ExtentManager;
 import com.itc.utilities.ExtentTestManager;
+import com.itc.utilities.ServiceNowAPI;
 import com.itc.utilities.VideoRecorderUtility;
 
 public class CustomListeners extends BaseTest implements ITestListener {
@@ -103,6 +104,38 @@ public class CustomListeners extends BaseTest implements ITestListener {
             }
         } catch (Exception e) {
             ExtentTestManager.getTest().log(Status.WARNING, "Failed to attach video: " + e.getMessage());
+        }
+        
+     // 3️⃣ Create ServiceNow Ticket
+        try {
+            String testName = result.getMethod().getMethodName();
+            String errorMessage = result.getThrowable() != null
+                    ? result.getThrowable().toString()
+                    : "No stack trace available";
+
+            String shortDesc = "Automation Test Failure: " + testName;
+            String detailedDesc = "Test failed due to: " + errorMessage;
+
+            detailedDesc += "\n\nScreenshot available in Extent Report.";
+            detailedDesc += "\nVideo recording (if available) located under test-output/test-videos/";
+
+            // Create ServiceNow ticket
+            ServiceNowAPI api = new ServiceNowAPI();
+            String ticketNumber = api.createIncidentInServiceNowTicket(shortDesc, detailedDesc);
+
+            if (ticketNumber != null) {
+                // ✅ Simply show the ticket number (no external URL needed)
+                ExtentTestManager.getTest().log(Status.FAIL,
+                        "🚨 Created ServiceNow Ticket: <b>" + ticketNumber + "</b>");
+                ExtentTestManager.getTest().info(
+                        "You can view this ticket directly in ServiceNow using its number above.");
+            } else {
+                ExtentTestManager.getTest().log(Status.WARNING,
+                        "⚠️ Failed to create ServiceNow ticket automatically.");
+            }
+        } catch (Exception e) {
+            ExtentTestManager.getTest().log(Status.WARNING,
+                    "⚠️ Exception while creating ServiceNow ticket: " + e.getMessage());
         }
     }
 
