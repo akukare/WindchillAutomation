@@ -82,4 +82,30 @@ public class ProductPageLocators {
     }
 
     public static final String folderBrowserinputXpath = "//input[@id='folderbrowser_PDMfilterSelect']";
+    
+    @FindBy(xpath = "//input[@id='folderbrowser_PDM.searchInListTextBox']")
+	public WebElement searchInputFolderPage;
+	
+	public  By documentCheckbox(String documentName) {
+	    return By.xpath("//a[contains(text(),'" + documentName + "')]/ancestor::tr//div[@class='x-grid3-cell-inner x-grid3-col-checker']");
+	}
+ 
+	public  By checkedOutImage(String partName) {
+	    return By.xpath("//a[contains(text(),'" + partName + "')]/ancestor::tr//img[contains(@src,'checkedout_byyou9x9.gif')]");
+	}
+ 
+	public By clickOnObj(String partName) {
+	    return By.xpath("//a[contains(text(),'" + partName + "')]");
+	}
+	
+	@FindBy(xpath = "//li[@id='infoPageinfoPanelID__infoPage_myTab_object_partInfoRelatedItemsTab']")
+	public WebElement  relatedObj;
+	
+	@FindBy(xpath = "//div[@id='part.relatedPartsDescribedByDocuments.list.toolBar']//button[contains(@style,'newdoc.gif')]")
+	public WebElement  newDoc;
+	
+	public By newname = By.xpath("//*[contains(@name,'newName_OR:wt_u46_part_u46_WTPart')]");
+ 
+	@FindBy(xpath = "//button[contains(text(),'K')]")
+	public WebElement clickOk;
 }

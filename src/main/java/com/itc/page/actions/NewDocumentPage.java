@@ -1,8 +1,12 @@
 package com.itc.page.actions;
 
+import java.util.NoSuchElementException;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import com.itc.base.BaseTest;
 import com.itc.pagelocators.CommonLocators;
@@ -76,4 +80,21 @@ public class NewDocumentPage extends BaseTest {
 			LogUtil.info("Error during part creation verification: " + e.getMessage());
 		}
 	}
+	
+	public  void validateDocumentIsPresent( String linkText) {
+        try {
+            WebElement link = driver.findElement(By.linkText(linkText));
+ 
+            Assert.assertTrue(link.isDisplayed(),
+                    "❌ Link with text '" + linkText + "' is not displayed on the page.");
+ 
+            LogUtil.info("✅ Link with text '" + linkText + "' is present and visible.");
+ 
+        } catch (NoSuchElementException e) {
+            Assert.fail("❌ Link with text '" + linkText + "' was not found on the page.", e);
+        } catch (Exception e) {
+            Assert.fail("⚠️ Error while validating link with text '" + linkText + "': " + e.getMessage(), e);
+        }
+    }
+ 
 }

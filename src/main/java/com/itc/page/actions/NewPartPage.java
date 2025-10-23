@@ -1,14 +1,17 @@
 package com.itc.page.actions;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap.KeySetView;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.itc.base.BaseTest;
 import com.itc.pagelocators.CommonLocators;
@@ -107,5 +110,21 @@ public class NewPartPage extends BaseTest {
 			wait.until(ExpectedConditions.elementToBeClickable(NewPart.searchInputFolderPage)).sendKeys(Keys.ENTER);
 			
 		}
+	
+	public  void validatePartIsCreated( String linkText) {
+        try {
+            WebElement link = driver.findElement(By.linkText(linkText));
+ 
+            Assert.assertTrue(link.isDisplayed(),
+                    "Link with text '" + linkText + "' is not displayed on the page.");
+ 
+            LogUtil.info("Link with text '" + linkText + "' is present and visible.");
+ 
+        } catch (NoSuchElementException e) {
+            Assert.fail("Link with text '" + linkText + "' was not found on the page.", e);
+        } catch (Exception e) {
+            Assert.fail("Error while validating link with text '" + linkText + "': " + e.getMessage(), e);
+        }
+    }
 	
 }

@@ -190,8 +190,76 @@ public class ProductPage extends BaseTest {
 		ElementActions.click(Product.editOption);
 	}
 	
-	public void ActionsButton() {ElementActions.click(Product.actionButton);
+	public void ActionsButton() {
+		ElementActions.click(Product.actionButton);
 	}
-	public void PRActionsButton() {ElementActions.click(Product.prActionButton);}
+	public void PRActionsButton() {
+		ElementActions.click(Product.prActionButton);
+	}
+	
+	public void searchObject(String object) {
+		WaitUtils.waitForSeconds(2);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.elementToBeClickable(Product.searchInputFolderPage)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(Product.searchInputFolderPage)).clear();
+		wait.until(ExpectedConditions.elementToBeClickable(Product.searchInputFolderPage)).sendKeys(object);
+		wait.until(ExpectedConditions.elementToBeClickable(Product.searchInputFolderPage)).sendKeys(Keys.ENTER);
+		
+	}
+ 
+	public void SelectObjectCheckbox(String objectName) {
+		WaitUtils.waitForSeconds(2);
+	     waitUntilVisible(Product.documentCheckbox(objectName),10);
+		driver.findElement(Product.documentCheckbox(objectName)).click();
+	}
+ 
+	public void ValidateObjectisCheckedOut(String partName) {
+	    try {
+	        WebElement image = driver.findElement(Product.checkedOutImage(partName));
+ 
+	        Assert.assertTrue(image.isDisplayed(),
+	                "❌ Checked Out image is NOT displayed for: " + partName);
+ 
+	        LogUtil.info("✅ Checked Out image is displayed for: " + partName);
+ 
+	    } catch (Exception e) {
+	        Assert.fail("⚠️ Error while validating Checked Out image for '"
+	                    + partName + "': " + e.getMessage(), e);
+	    }
+	}
+	
+	public void ClickOnExactObject(String object) {
+		WaitUtils.waitForSeconds(2);
+	     waitUntilVisible(Product.clickOnObj(object),10);
+		driver.findElement(Product.clickOnObj(object)).click();
+	}
+	
+	public void RelatedObjectTab() {
+		ElementActions.click(Product.relatedObj);
+	}
+	
+	public void ClickNewDocumentIcon() {
+		ElementActions.click(Product.newDoc);
+	}
+	
+	public void switchToIframe() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+		WebElement iframeElement = wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='lbContentIframe']")));
+		driver.switchTo().frame(iframeElement);
+	}
+	public void SetNewName(String name) {
+		WaitUtils.waitForSeconds(2);
+		waitUntilVisible(Product.newname,10).click();
+		waitUntilVisible(Product.newname,10).clear();
+		WaitUtils.waitForSeconds(1);
+		waitUntilVisible(Product.newname,10).sendKeys(name);
+		waitUntilVisible(Product.newname,10).sendKeys(Keys.ENTER);
+		WaitUtils.waitForSeconds(2);
+	}
+	
+	public void clickOk() {
+		click(Product.clickOk);
+	}
 
 }

@@ -7,18 +7,33 @@
     </listeners>
  
     <!-- Step 4: Configure Test Classes -->
-    <test name="EPM Test">
-        <classes>
-            <class name="com.itc.testcases.CreateEPMDocument"/>
-        </classes>
-    </test>
      <test name="Part Test">
         <classes>
             <class name="com.itc.testcases.Createnewpart"/>
         </classes>
     </test>
-             <!--  <class name="com.itc.testcases.CreateChangeRequest"/>
-             <class name="com.itc.testcases.CreateEPMDocument"/>
+    <test name="Checkout And UndoCheckout of Part">
+        <classes>
+            <class name="com.itc.testcases.CheckoutAndUndoCheckoutofPart"/>
+        </classes>
+    </test>
+    <test name="Search Change Request">
+        <classes>
+            <class name="com.itc.testcases.SearchChangeRequest"/>
+        </classes>
+    </test>
+    <test name="EPM Test">
+        <classes>
+            <class name="com.itc.testcases.CreateEPMDocument"/>
+        </classes>
+    </test>
+    <test name="Search Document">
+        <classes>
+            <class name="com.itc.testcases.SearchDocument"/>
+        </classes>
+    </test>
+            <!--  <class name="com.itc.testcases.CreateChangeRequest"/>
+            <class name="com.itc.testcases.CreateEPMDocument"/>
             <class name="com.itc.testcases.CreatenewFolder"/>
             <class name="com.itc.testcases.Createnewpart"/>
             <class name="com.itc.testcases.CreateProblemReport"/>
