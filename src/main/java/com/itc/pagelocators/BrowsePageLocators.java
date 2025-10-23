@@ -27,16 +27,16 @@ public class BrowsePageLocators {
     //Please write from here Dynamic locator method - cannot use @FindBy
     
     public By productElement(String productName) {
-        return By.xpath("//div[@id='productNavigation']//span[contains(text(), '" + productName + "')]");
-    }
-    
-    public By expandProduct(String productName) {
-        return By.xpath("//span[contains(text(), '" + productName + "')]/following::img[contains(@class, 'x-tree-elbow-end-plus')]");
-    }
-    
-    public By selectSubProduct(String productName, String sectionName) {
-        return By.xpath("//span[contains(text(), '" + productName + "')]/following::span[contains(text(), '" + sectionName + "')]");
-    }
+		return By.xpath("//div[@id='productNavigation']//span[contains(text(), '" + productName + "')]");
+	}
+	
+	public By expandProduct(String productName) {
+		return By.xpath("//span[contains(text(), '" + productName + "')]/following::img[contains(@class, 'x-tree-elbow-plus')]");
+	}
+	
+	public By selectSubProduct(String productName, String sectionName) {
+		return By.xpath("//span[contains(text(), '" + productName + "')]/following::span[contains(text(), '" + sectionName + "')]");
+	}
     
     public By actionMenu(String name) {
         return By.xpath("//span[@class='x-menu-item-text' and contains(text(), '" + name + "')]");
