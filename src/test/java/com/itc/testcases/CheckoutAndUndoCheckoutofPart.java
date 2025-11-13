@@ -118,6 +118,7 @@ public class CheckoutAndUndoCheckoutofPart extends BaseTest {
 			product.folderContentsDropdown(foldertext);
 
 			LogUtil.info("Verify Part is created");
+			newPartPage.searchObject(partName);
 			newPartPage.validatePartIsCreated(partName);
 			product.SelectObjectCheckbox(partName);
 			product.gotoActions();
@@ -130,6 +131,7 @@ public class CheckoutAndUndoCheckoutofPart extends BaseTest {
 			product.ValidateObjectisCheckedOut(partName);
 			
 			WaitUtils.waitForSeconds(2);
+			newPartPage.searchObject(partName);
 			product.SelectObjectCheckbox(partName);
 			product.gotoActions();
 

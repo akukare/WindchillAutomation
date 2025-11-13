@@ -101,7 +101,7 @@ public class CreateChangeNotice extends BaseTest{
 	
 	public void verifyCreateChangeNotice() {
 			LogUtil.info("Login windchill");
-			loginToWindchill("windchillSignOndemouser", "windchillSignOnPassworddemouser");
+			loginToWindchill("windchillSignOndemouser", "windchillSignOnPassword");
  
 			LogUtil.info("Navigating to Browse page");
 			home.gotoBrowse();
@@ -129,6 +129,7 @@ public class CreateChangeNotice extends BaseTest{
  
 			LogUtil.info("Click on finish");
 			ChangeNotice.clickFinish();
+			ChangeNotice.clickSubmit();
 			switchToMainWindow(parentWindow);
  
 			LogUtil.info(" Verify  Chnage Notice Created");

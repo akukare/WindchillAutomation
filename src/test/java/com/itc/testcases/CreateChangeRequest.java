@@ -2,7 +2,10 @@ package com.itc.testcases;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import com.itc.Listeners.CustomListeners;
 import com.itc.base.BaseTest;
 import com.itc.page.actions.BOMPageActions;
 import com.itc.page.actions.BrowsePage;
@@ -50,7 +53,7 @@ import com.itc.utilities.XMLReader;
 *
 * @author "*****"
 */
- 
+@Listeners(CustomListeners.class)
 public class CreateChangeRequest extends BaseTest {
 		HomePage home;
 		BrowsePage browse;
@@ -65,7 +68,6 @@ public class CreateChangeRequest extends BaseTest {
  
 		@BeforeClass
 			public void setup() {
-			LogUtil.info("Launching login page");
 			config = ConfigReader.getProperties();
 			xmlReader = new XMLReader();
 			productName = xmlReader.getData("product");
@@ -75,7 +77,6 @@ public class CreateChangeRequest extends BaseTest {
  
 		@BeforeMethod
 		public void beforeMethod() throws Exception {
-			LogUtil.info("Login windchill");
 			initializeDriver();
 			home = new HomePage();
 			browse = new BrowsePage();
@@ -105,6 +106,7 @@ public class CreateChangeRequest extends BaseTest {
  
 				LogUtil.info("Click on expand  and navigate to \"Folders\" of product" );
 				browse.openSpecificSectionOfProduct(productName, "Folders");
+				String parentWindow = driver.getWindowHandle();
  
 				LogUtil.info("Click on Action " );
 				product.gotoActions();
@@ -127,6 +129,7 @@ public class CreateChangeRequest extends BaseTest {
  
 				LogUtil.info(" Click on Submit button");
 				ChangeRequest.clickSubmit();
+				switchToMainWindow(parentWindow);
  
 				LogUtil.info(" Verify  Chnage Request Created");
 				ChangeRequest.verifyChangeRequestCreated();

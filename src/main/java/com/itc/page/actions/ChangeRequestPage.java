@@ -10,6 +10,7 @@ import org.testng.Assert;
 import com.itc.base.BaseTest;
 import com.itc.pagelocators.ChangeRequestLocators;
 import com.itc.utilities.LogUtil;
+import com.itc.utilities.WaitUtils;
 
 public class ChangeRequestPage extends BaseTest {
 	public ChangeRequestLocators ChangeRequest;
@@ -29,12 +30,13 @@ public class ChangeRequestPage extends BaseTest {
 	}
 
 	public void clickFinish() {
-
-		click(ChangeRequest.FinishButton);
+		WaitUtils.waitForSeconds(2);
+		WaitUtils.waitUntilVisible(driver,ChangeRequest.FinishButton,10).click();
 	}
 
 	public void clickSubmit() {
-		click(ChangeRequest.Submit);
+		WaitUtils.waitForSeconds(2);
+		WaitUtils.waitUntilVisible(driver,ChangeRequest.Submit,10).click();
 	}
 
 	public void clickAddnumbertextbox() {

@@ -18,11 +18,11 @@ public class ChangeRequestLocators{
 
 	public WebElement Addbynumber;
 
-	@FindBy(xpath = "//button[@id='ext-gen39']")
+	@FindBy(xpath = "//button[contains(normalize-space(),'Finish')]")
 
 	public WebElement  FinishButton;
 
-	@FindBy(xpath = "//b[contains(text(),'Submit Now')]")
+	@FindBy(xpath = "//table[contains(@id,'submitNowBtn')]//button")
 
 	public WebElement  Submit;	
  

@@ -51,8 +51,10 @@ public void openSpecificSectionOfProduct(String productName, String sectionName)
     try {
         WebElement productElement = driver.findElement(Browse.productElement(productName));
         WaitUtils.waitForElementVisible(Browse.productElement(productName), 20).click();
+        WaitUtils.waitForSeconds(2);
         try {
             List<WebElement> plusIcons = driver.findElements(Browse.expandProduct(productName));
+            WaitUtils.waitForSeconds(2);
             if (!plusIcons.isEmpty() && plusIcons.get(0).isDisplayed()) {
             	 WaitUtils.waitForElementClickable(productElement,10).click();
             	 WaitUtils.waitForSeconds(1);
