@@ -1,16 +1,20 @@
 package com.itc.testcases;
  
- 
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
- 
+
+import com.itc.Listeners.CustomListeners;
 import com.itc.base.BaseTest;
+import com.itc.page.actions.BOMPageActions;
 import com.itc.page.actions.BrowsePage;
 import com.itc.page.actions.ChangeNoticePage;
  
 import com.itc.page.actions.HomePage;
+import com.itc.page.actions.NewPartPage;
 import com.itc.page.actions.ProductPage;
 import com.itc.page.actions.ReassignTasksPage;
 import com.itc.utilities.ConfigReader;
@@ -49,37 +53,42 @@ import com.itc.utilities.XMLReader;
 * @author "*****"
 */
  
- 
+@Listeners(CustomListeners.class)
 public class ReassignChangeNotice extends BaseTest{
 	HomePage home;
 	BrowsePage browse;
 	ProductPage product;
 	ReassignTasksPage reassigntasks;
 	ChangeNoticePage ChangeNotice;
+	NewPartPage newPartPage;
+	BOMPageActions BOMPag;
 	private XMLReader xmlReader;
 	private String productName;
 	String changeNoticeName;
 	String changeTaskName;
+	String folderDropdownText;
+	String ChangeObjects;
  
 	@BeforeClass
 	public void setup() {
-		LogUtil.info("Launching login page");
 		config = ConfigReader.getProperties();
 		xmlReader = new XMLReader();
 		productName = xmlReader.getData("product");
 		changeNoticeName = "CN_New - " + generateRandomNumber(5);
 		changeTaskName = "CT_New - " + generateRandomNumber(5);
+		ChangeObjects=xmlReader.getData("ChangeObjects");
 	}
  
 	@BeforeMethod
 	 public void beforeMerhod() {
-		LogUtil.info("Login windchill");
 		initializeDriver();
 		home = new HomePage();
 		browse = new BrowsePage();
 		product = new ProductPage();
 		reassigntasks = new ReassignTasksPage();
 		ChangeNotice = new ChangeNoticePage();
+		newPartPage = new NewPartPage();
+		BOMPag =new BOMPageActions();
 	 }
 
 	@Test
@@ -89,8 +98,9 @@ public class ReassignChangeNotice extends BaseTest{
         TestCaseID = "",
         Description = "User reassign Change Notice")
 	public void verifyReassignChangeNotice() {
+		
 		LogUtil.info("Login windchill");
-		loginToWindchill("windchillSignOndemouser", "windchillSignOnPassword");
+	    loginToWindchill("windchillSignOnadmin", "windchillSignOnPasswordadmin");
  
 		LogUtil.info("Navigating to Browse page");
 		home.gotoBrowse();
@@ -102,7 +112,6 @@ public class ReassignChangeNotice extends BaseTest{
 		browse.openSpecificSectionOfProduct(productName, "Folders");
  
 		String parentWindow = driver.getWindowHandle();
-		driver.navigate().refresh();
  
 		LogUtil.info("Click on action");
 		product.gotoActions();
@@ -114,78 +123,85 @@ public class ReassignChangeNotice extends BaseTest{
  
 		LogUtil.info("Create new change notice");
 		ChangeNotice.clearName();
-		
-		ChangeNotice.enterchangerequestname(changeNoticeName);
+		ChangeNotice.enterChangeNoticeName(changeNoticeName);
 		ChangeNotice.clickNextbtn();
+		
+		LogUtil.info("Create new change task");
 		ChangeNotice.clickEditChangeTask();
- 
-		switchToNewWindow();
-		switchToWindowByHeader("New Change Notice");
- 
-		System.out.println("Current window title: " + driver.getTitle());
- 
 		ChangeNotice.clearChangeTaskName();
 		ChangeNotice.enterChangeTaskName(changeTaskName);   
- 
-		ChangeNotice.clickNextbtn();
- 
-		LogUtil.info("Click on finish");
+     	ChangeNotice.clickNextbtn();
+        
+		LogUtil.info("Click on finish change task");
 		ChangeNotice.clickFinish();
- 
+		
 		LogUtil.info("Click on submit button");
+		driver.switchTo().defaultContent();
+		ChangeNotice.clickFinish();
 		ChangeNotice.clickSubmit();
+		
 		switchToMainWindow(parentWindow);
+		
+		ChangeNotice.closeBanner();
+		
+		LogUtil.info("Navigate to Homepage");
+		home.gotohomeIcon();
+		String reassigntaskWindow = driver.getWindowHandle();
  
+		LogUtil.info("Click on Public Tab" );
+		home.gotopublicTab();
+  
+		home.Reassign_changerequest_select(changeTaskName);
+		reassigntasks.click_Reassigntask();
+ 
+		SwitchtoReassigntasksofchange_window(" demouser (demouser: dxp) ");
+		reassigntasks.clickOK_btn();
+		
+		driver.switchTo().window(reassigntaskWindow);
+		driver.close();
+		
+		LogUtil.info("Login windchill with demouser");
+		beforeMerhod();
+		loginToWindchill("windchillSignOndemouser", "windchillSignOnPassworddemouser");
+
 		LogUtil.info("Navigate to Homepage");
 		home.gotohomeIcon();
  
 		LogUtil.info("Click on Public Tab" );
 		home.gotopublicTab();
- 
-		String reassigntaskWindow = driver.getWindowHandle();
- 
-		home.Reassign_changerequest_select(changeTaskName);
-		reassigntasks.click_Reassigntask();
-		switchToWindowByHeader("Reassign Tasks");
- 
-		SwitchtoReassigntasksofchange_window(" demouser (demouser: dxp) ");
-		reassigntasks.clickOK_btn();
-
-		switchToMainWindow(reassigntaskWindow);
- 
-		LogUtil.info("Click on Reassign task button" );
-		reassigntasks.click_Reassigntask();
 		
+		LogUtil.info("Click on view info icon on Change Task" );
+		ChangeNotice.clickOnViewInfoIconOnChangeTask(changeTaskName);
  
-		LogUtil.info("Click on Okay");
-		reassigntasks.clickOK_btn();
+		LogUtil.info("Click on complete change task" );
+		ChangeNotice.clickOnCompleteTaskButon();
 		
-		switchToMainWindow(reassigntaskWindow);
- 
-		LogUtil.info("Verify Change Request Reassigned" );
-		home.VerifyTaskReassigned(changeNoticeName);
- 
+		LogUtil.info("Verify if change task completed");
+		boolean isTaskCompleted =ChangeNoticePage.validateChangeTaskStatus(changeTaskName,"Completed");
+		Assert.assertTrue(isTaskCompleted,"change task completed");
 	}
-	
+	    
 	@AfterTest
 	public void tearDown() {
-		LogUtil.info("Delete CN");
+		 LogUtil.info("Delete CN");
 			home.gotoBrowse();
 			browse.RecentProducts();
 			browse.openSpecificSectionOfProduct(productName, "Folders");
-			product.folderContentsDropdown(xmlReader.getData("Change Objects"));
-			product.selectFolderCheckbox(changeNoticeName);
+			product.folderContentsDropdown(ChangeObjects);
+			newPartPage.searchObject(changeNoticeName);
+			BOMPag.selectObject(changeNoticeName);
 			product.gotoActions();
 			product.takeActions("Delete");
-			if (WaitUtils.isAlertPresent()) {
-				performAlertAction("gettext");
-				performAlertAction("accept");
-				LogUtil.info("Alert was accepted.");
-			} else {
-				LogUtil.info("No alert Present");
+			try {
+			WaitUtils.isAlertPresent(); 
+			LogUtil.info("Alert was accepted.");
+			performAlertAction("accept");
+			}catch(Exception e) {
 			}
-			WaitUtils.waitForSeconds(2);
 			sessionEnd();
- 		}  
 	}
+	}
+
+
+
  

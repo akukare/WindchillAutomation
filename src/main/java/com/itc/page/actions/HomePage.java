@@ -47,16 +47,17 @@ public class HomePage extends BaseTest {
 	}
 
 	public void gotohomeIcon() {
-		ElementActions.click(home.homepageIcon);
+		WaitUtils.waitForSeconds(2);
+		WaitUtils.waitForElementClickable(home.homepageIcon,10).click();
 	}
 
 	public void gotopublicTab() {
-		ElementActions.click(home.publicTab);
-		refreshPage();
+		WaitUtils.waitForSeconds(2);
+		WaitUtils.waitForElementClickable(home.publicTab,10).click();
 	}
 
 	public void gotoReassignTab() {
-		WaitUtils.waitForSeconds(1);
+		WaitUtils.waitForSeconds(2);
 		ElementActions.click(home.reassign);
 	}
 

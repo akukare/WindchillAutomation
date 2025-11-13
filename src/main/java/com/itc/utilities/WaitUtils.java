@@ -42,7 +42,7 @@ public class WaitUtils extends BaseTest{
 			throw new RuntimeException("Element not clickable within " + timeoutInSeconds + " sec: " + locator, e);
 		}
 	}
-	public WebElement waitForElementClickable(WebElement locator, int timeoutInSeconds) {
+	public static WebElement waitForElementClickable(WebElement locator, int timeoutInSeconds) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
 			return wait.until(ExpectedConditions.elementToBeClickable(locator));

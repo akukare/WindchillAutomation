@@ -50,22 +50,29 @@ public class BrowsePage extends BaseTest {
 public void openSpecificSectionOfProduct(String productName, String sectionName) {
     try {
         WebElement productElement = driver.findElement(Browse.productElement(productName));
-        WaitUtils.waitForElementVisible(Browse.productElement(productName), 20);
+        WaitUtils.waitForElementVisible(Browse.productElement(productName), 20).click();
         try {
             List<WebElement> plusIcons = driver.findElements(Browse.expandProduct(productName));
             if (!plusIcons.isEmpty() && plusIcons.get(0).isDisplayed()) {
-            	ElementActions.click(productElement);
-            	WaitUtils.waitForSeconds(1);
+            	 WaitUtils.waitForElementClickable(productElement,10).click();
+            	 WaitUtils.waitForSeconds(1);
             }
         } catch (Exception ex) {
         	LogUtil.info("Expansion check skipped: " + ex.getMessage());
         }
         WebElement sectionElement = driver.findElement(Browse.selectSubProduct(productName, sectionName));
         WaitUtils.waitForElementVisible(Browse.selectSubProduct(productName, sectionName), 20);
-        ElementActions.click(sectionElement);
+        WaitUtils.waitForElementClickable(sectionElement,10).click();
     } catch (Exception e) {
     	LogUtil.info("Error navigating to section: " + sectionName + " in product: " + productName + ". Cause: " + e.getMessage());
     }
 }
 
+public void clickOnRecentProduct(String productName) {
+    try {
+        WaitUtils.waitForElementVisible(Browse.expandProduct(productName), 20).click();
+    }catch(Exception e) {
+    	
+    }
+}
 }

@@ -101,7 +101,7 @@ public class CreateChangeNotice extends BaseTest{
 	
 	public void verifyCreateChangeNotice() {
 			LogUtil.info("Login windchill");
-			loginToWindchill("windchillSignOndemouser", "windchillSignOnPassword");
+			loginToWindchill("windchillSignOndemouser", "windchillSignOnPassworddemouser");
  
 			LogUtil.info("Navigating to Browse page");
 			home.gotoBrowse();
@@ -111,6 +111,7 @@ public class CreateChangeNotice extends BaseTest{
  
 			LogUtil.info("Click on expand  and navigate to \"Folders\" of product");
 			browse.openSpecificSectionOfProduct(productName, "Folders");
+			String parentWindow = driver.getWindowHandle();
  
 			LogUtil.info("Click on action");
 			product.gotoActions();
@@ -123,14 +124,12 @@ public class CreateChangeNotice extends BaseTest{
 			LogUtil.info("Create new change notice");
 			ChangeNotice.clearName();
  
-			ChangeNotice.enterchangerequestname(changeNoticeName);
+			ChangeNotice.enterChangeNoticeName(changeNoticeName);
 			ChangeNotice.clickNextbtn();
  
 			LogUtil.info("Click on finish");
 			ChangeNotice.clickFinish();
- 
-			LogUtil.info("Click on submit button");
-			ChangeNotice.clickSubmit();
+			switchToMainWindow(parentWindow);
  
 			LogUtil.info(" Verify  Chnage Notice Created");
 			ChangeNotice.verifyChangeNoticeCreated();

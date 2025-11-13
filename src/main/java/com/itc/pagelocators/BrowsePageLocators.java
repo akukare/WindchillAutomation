@@ -31,7 +31,7 @@ public class BrowsePageLocators {
 	}
 	
 	public By expandProduct(String productName) {
-		return By.xpath("//span[contains(text(),'"+productName+"')]/following::img[contains(@class,'x-tree-elbow-plus')]");
+		return By.xpath("//div[@id='productNavigation']//child::li[@class='x-tree-node']//child::span[contains(text(),'"+productName+"')]//ancestor::div[contains(@class,'tree-node')]//img[contains(@class,'plus')]");
 	}
 	
 	public By selectSubProduct(String productName, String sectionName) {

@@ -171,7 +171,7 @@ public class EditBOMReadlineAddingNewPart extends BaseTest {
 			LogUtil.info("Create new change notice");
 			ChangeNotice.clearName();
 
-			ChangeNotice.enterchangerequestname(changeNoticeName);
+			ChangeNotice.enterChangeNoticeName(changeNoticeName);
 			ChangeNotice.clickNextbtn();
 			
 			LogUtil.info("Click on edit change task");

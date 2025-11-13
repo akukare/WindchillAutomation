@@ -124,7 +124,7 @@ public class UpdateChangeNotice extends BaseTest {
 			LogUtil.info("Create new change notice");
 			ChangeNotice.clearName();
 			waitForSeconds(3);
-			ChangeNotice.enterchangerequestname(changeNoticeName);
+			ChangeNotice.enterChangeNoticeName(changeNoticeName);
 			ChangeNotice.clickNextbtn();
  
 			LogUtil.info("Click on finish");

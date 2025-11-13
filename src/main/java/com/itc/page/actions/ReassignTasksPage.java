@@ -32,12 +32,12 @@ public class ReassignTasksPage extends BaseTest {
 	}
 
 	public void clickOK_btn() {
-
 		ElementActions.click(reassigntasks.OK_btn);
+		driver.switchTo().defaultContent();
 	}
 
 	public void click_Reassigntask() {
 		ElementActions.click(reassigntasks.Reassigntasks);
-
+       switchToNewWindow();
 	}
 }

@@ -2,5 +2,5 @@
 <testdata>
 	<product>testProduct</product>
 	<partDropdown>Change Objects</partDropdown>
-	<folderDropdownText>Change Objects</folderDropdownText>
+	<ChangeObjects>Change Objects</ChangeObjects>
 </testdata>

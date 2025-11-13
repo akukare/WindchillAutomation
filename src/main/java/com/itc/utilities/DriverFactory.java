@@ -1,6 +1,7 @@
 package com.itc.utilities;
 
 import java.io.File;
+import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -140,4 +141,9 @@ public class DriverFactory {
 		System.setProperty("webdriver." + browser + ".driver", driverPath);
 		System.out.println("Set " + browser + " driver path: " + driverPath);
 	}
+	
+	  public static void closeDriver() {
+	        driver.get().quit();
+	        driver.remove();
+	    }
 }

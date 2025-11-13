@@ -14,8 +14,9 @@ import org.testng.Assert;
 import com.itc.base.BaseTest;
 
 import com.itc.pagelocators.ChangeNoticeLocators;
-
+import com.itc.utilities.ElementActions;
 import com.itc.utilities.LogUtil;
+import com.itc.utilities.WaitUtils;
 
 public class ChangeNoticePage extends BaseTest {
 
@@ -29,20 +30,23 @@ public class ChangeNoticePage extends BaseTest {
 
 	}
 
-	public void enterchangerequestname(String Name) {
+	public void enterChangeNoticeName(String Name) {
 		type(ChangeNotice.Name, Name);
 	}
 
 	public void clickNextbtn() {
-		click(ChangeNotice.Nextbtn);
+		WaitUtils.waitForSeconds(2);
+		WaitUtils.waitUntilVisible(driver,ChangeNotice.Nextbtn,10).click();
 	}
 
 	public void clickFinish() {
-		click(ChangeNotice.FinishButton);
+		WaitUtils.waitForSeconds(2);
+		WaitUtils.waitUntilVisible(driver,ChangeNotice.FinishButton,10).click();
 	}
 
 	public void clickSubmit() {
-		click(ChangeNotice.Submit);
+		WaitUtils.waitForSeconds(2);
+	    WaitUtils.waitUntilVisible(driver,ChangeNotice.submittButton,10).click();
 	}
 
 	public void clickAddnumbertextbox() {
@@ -63,14 +67,19 @@ public class ChangeNoticePage extends BaseTest {
 		WebElement iframeElement = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[contains(@id,'popCreateWizard')]")));
 		driver.switchTo().frame(iframeElement);
+		switchToNewWindow();
 	}
 
 	public void clearChangeTaskName() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+		WebElement iframeElement = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//iframe[contains(@id,'popCreateWizard')]")));
+		driver.switchTo().frame(iframeElement);
 		clear(ChangeNotice.ChangeTaskName);
 	}
 
 	public void enterChangeTaskName(String Name) {
-		type(ChangeNotice.Name, Name);
+		type(ChangeNotice.ChangeTaskName, Name);
 	}
 
 	public void verifyChangeNoticeCreated() {
@@ -126,5 +135,35 @@ public class ChangeNoticePage extends BaseTest {
         buttons.get(0).click();
 
     }
+	
+	public void clickOnViewInfoIconOnChangeTask(String taskName) {
+		WaitUtils.waitForElementVisible(ChangeNotice.viewInfoIconOnChangeTask(taskName),10).click();
+	}
+	
+	public void clickOnCompleteTaskButon() {
+		WaitUtils.waitForSeconds(3);
+		WaitUtils.waitForElementClickable(ChangeNotice.completeTaskButton,10).click();
+		
+	}
+	
+	public void closeBanner() {
+		try {
+		WaitUtils.waitUntilVisible(driver,ChangeNotice.closeBanner,10).click();
+		}catch(Exception e) {
+		}
+		WaitUtils.waitForSeconds(4);
+	}
+	
+	 public static boolean validateChangeTaskStatus(String changeTaskName, String status) {
+		 WaitUtils.waitForSeconds(4);
+	        try {
+	            WebElement object = driver.findElement(By.xpath("//tr[.//*[contains(text(),'"+changeTaskName+"')]]//div[contains(text(),'"+status+"')]"));
+	            boolean taskCompleted = object.isDisplayed();
+	            WaitUtils.waitForSeconds(3);
+	            return taskCompleted;
+	        } catch (Exception e) {
+	            return false;
+	        }
+	    }
 
 }
